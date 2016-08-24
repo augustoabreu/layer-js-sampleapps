@@ -9,12 +9,14 @@ export default class ConversationList extends Component {
   renderConversationListItem = (conversation) => {
     const {
       activeConversationId,
-      onDeleteConversation
+      onDeleteConversation,
+      owner,
     } = this.props;
 
     return (
       <ConversationListItem
         key={conversation.id}
+        owner={owner}
         conversation={conversation}
         active={activeConversationId === conversation.id}
         onDeleteConversation={onDeleteConversation} />

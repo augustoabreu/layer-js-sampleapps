@@ -1,12 +1,13 @@
 import {
   CLIENT_READY,
-  OWNER_SET
+  USERS_SET
 } from '../actions/messenger';
 
 const initialState = {
   ready: false,
   clientReady: false,
-  owner: {}
+  owner: '',
+  users: [],
 };
 
 export default function appReducer(state = initialState, action) {
@@ -19,10 +20,11 @@ export default function appReducer(state = initialState, action) {
         ready: true,
         clientReady: true
       };
-    case OWNER_SET:
+    case USERS_SET:
       return {
         ...state,
         owner: payload.owner,
+        users: payload.users,
       };
     default:
       return state;

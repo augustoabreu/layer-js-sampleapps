@@ -26,15 +26,13 @@ module.exports = Backbone.View.extend({
               '</div>';
     }
     else if (this.conversation) {
+      var ownerId = this.conversation.getClient().userId;
       var title = this.conversation.metadata.title;
       if (!title) {
         title = this.conversation.participants
-        .filter(function(user) {
-          return !user.sessionOwner;
+        .filter(function(userId) {
+          return userId !== ownerId;
         })
-        .map(function(user) {
-          return user.displayName;
-        }, this)
         .join(', ').replace(/(.*),(.*?)/, '$1 and$2');
       }
       html = '<div class="title-inner">' + title +

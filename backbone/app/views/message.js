@@ -22,9 +22,8 @@ module.exports = Backbone.View.extend({
         }
       });
 
-      this.$el.append('<div class="avatar-image"><img src="' + this.model.sender.avatarUrl + '" /></div>' +
-                      '<div class="message-content">' +
-                        '<span class="name">' + this.model.sender.displayName + '</span>' +
+      this.$el.append('<div class="message-content">' +
+                        '<span class="name">' + (this.model.sender.userId || this.model.sender.name) + '</span>' +
                         '<div class="message-parts">' + parts + '</div>' +
                       '</div>' +
                       '<div class="timestamp">' + timestamp +

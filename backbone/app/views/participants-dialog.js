@@ -7,6 +7,7 @@ module.exports = Backbone.View.extend({
   el: '.participants-dialog',
   initialize: function() {
     this.$el.find('.button-ok').on('click', this.createConversation.bind(this));
+    this.users = window.layerSample.users;
   },
   render: function() {
     if (!this.users) return;
@@ -18,10 +19,9 @@ module.exports = Backbone.View.extend({
     if (participant !== this.user) {
       this.$list.append(
         '<div class="participant-item">' +
-          '<div class="avatar-image"><img src="' + participant.avatarUrl + '" /></div>' +
-          '<label for="participant-checkbox-' + participant.id + '">' + participant.displayName + '</label>' +
-          '<input value="' + participant.userId + '" ' +
-              'id="participant-checkbox-' + participant.id + '" ' +
+          '<label for="participant-checkbox-' + participant + '">' + participant + '</label>' +
+          '<input value="' + participant + '" ' +
+              'id="participant-checkbox-' + participant + '" ' +
               'type="checkbox" ' +
               'name="userList"/>' +
         '</div>'
@@ -34,6 +34,7 @@ module.exports = Backbone.View.extend({
       participants.push(input.value);
     });
     this.trigger('conversation:create', participants);
+    this.$el.addClass('hidden');
   },
   events: {
     'click .participant-list-container': 'clickStopPropagation',
@@ -44,6 +45,7 @@ module.exports = Backbone.View.extend({
   },
   show: function() {
     this.$el.removeClass('hidden');
+    this.render();
   },
   hide: function() {
     this.$el.addClass('hidden');

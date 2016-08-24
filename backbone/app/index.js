@@ -39,7 +39,7 @@ window.addEventListener('message', function(evt) {
    * Client ready. Initialize controller.
    */
   client.once('ready', function() {
-    $('.left-panel .panel-header .title').text(client.user.displayName + '\'s Conversations');
+    $('.left-panel .panel-header .title').text(client.userId + '\'s Conversations');
     controller(client);
   });
 

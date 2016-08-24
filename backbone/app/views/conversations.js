@@ -14,6 +14,7 @@ module.exports = Backbone.View.extend({
 
     this.$el.empty();
     this.conversations.forEach(function(conversation) {
+      var ownerId = conversation.getClient().userId;
       var uuid = conversation.id.substr(conversation.id.lastIndexOf('/') + 1); // extract just UUID
       var unread = conversation.unreadCount !== 0 ? 'unread-messages ' : '';
       var participants = conversation.participants;
@@ -23,23 +24,15 @@ module.exports = Backbone.View.extend({
       if (!title) {
         title = participants
         .filter(function(user) {
-          return !user.sessionOwner;
+          return user !== ownerId;
         })
-        .map(function(user) {
-          return user.displayName;
-        });
+        .join(', ').replace(/(.*),(.*?)/, '$1 and$2');
       }
 
       var selectedClass = '';
       if (this.conversation && conversation.id === this.conversation.id) selectedClass = 'selected-conversation';
 
-      var avatars = participants.map(function(user) {
-        return '<span><img src="' + user.avatarUrl + '" /></span>';
-      });
-      var cluster = avatars.length > 1 ? 'cluster' : '';
-
       this.$el.append('<a class="conversation-item ' + unread + selectedClass + '" href="#conversations/' + uuid + '">' +
-                        '<div class="avatar-image ' + cluster + '">' + avatars.join('') + '</div>' +
                         '<div class="info">' +
                           '<div class="main">' +
                             '<span class="title">' + title + '</span>' +

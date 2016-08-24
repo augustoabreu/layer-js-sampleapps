@@ -9,7 +9,7 @@ export default class Avatar extends Component {
   }
 
   renderUserItem = (user) => {
-    return <span key={'avatar-' + user.id}><img src={user.avatarUrl} /></span>;
+    return <span key={'avatar-' + user.userId}><img src={user.avatarUrl} /></span>;
   }
 
   render() {

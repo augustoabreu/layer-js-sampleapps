@@ -62,12 +62,6 @@ module.exports = function(client) {
     paginationWindow: 30
   });
 
-  /**
-   * Create Identity List Query
-   */
-  var identityQuery = client.createQuery({
-    model: layer.Query.Identity
-  });
 
   /**
    * Any time a query data changes we should rerender.  Data changes when:
@@ -114,13 +108,6 @@ module.exports = function(client) {
     });
     Backbone.$('.announcements-button').toggleClass('unread-announcements', unread.length > 0);
   });
-  identityQuery.on('change', function(evt) {
-    if (evt.type === 'data') {
-      window.layerSample.validateSetup(client);
-    }
-    participantsView.users = identityQuery.data;
-    participantsView.render();
-  });
 
   /**
    * Any typing indicator events received from the client
@@ -131,8 +118,8 @@ module.exports = function(client) {
   client.on('typing-indicator-change', function(e) {
     if (e.conversationId === activeConversationId) {
       typingindicatorView.typing = e.typing;
+      typingindicatorView.render();
     }
-    typingindicatorView.render();
   });
 
   /**
@@ -212,6 +199,8 @@ module.exports = function(client) {
     titlebarView.render();
     sendView.render();
     participantsView.render();
+    typingindicatorView.typing = [];
+    typingindicatorView.render();
   }
 
   if (window.location.hash) Backbone.history.loadUrl(Backbone.history.fragment);

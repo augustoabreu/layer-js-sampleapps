@@ -59,14 +59,14 @@ export default class ConversationHeader extends Component {
    * Render a title with an button for changing to edit mode
    */
   renderTitle() {
-    const { activeConversation, disableEdit } = this.props;
+    const { activeConversation, disableEdit, owner } = this.props;
     var title = '← Create a new conversation or select a conversation from the list.';
     if (activeConversation) {
       if (activeConversation.metadata.title) {
         title = activeConversation.metadata.title;
       } else {
         title = activeConversation.participants
-        .map(user => user.displayName)
+        .filter(user => user !== owner)
         .join(', ');
       }
     }

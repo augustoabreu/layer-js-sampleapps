@@ -9,7 +9,7 @@ import { connectTypingIndicator } from 'layer-react';
 export default class TypingIndicator extends Component {
 
   getTypingText(users) {
-    const userNames = users.map(user => user.displayName).join(', ');
+    const userNames = users.join(', ');
 
     if (users.length == 1) {
       return userNames + ' is typing.'

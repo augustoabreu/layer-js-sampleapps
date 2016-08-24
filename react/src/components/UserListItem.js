@@ -21,8 +21,7 @@ export default class UserListItem extends Component {
     const { user, selected } = this.props;
     return (
       <div className='participant-item' onClick={this.handleClick}>
-        <Avatar user={user}/>
-        <label className='title'>{user.displayName}</label>
+        <label className='title'>{user}</label>
         <input type='checkbox' checked={selected}/>
       </div>
     );

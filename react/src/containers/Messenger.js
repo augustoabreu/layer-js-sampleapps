@@ -15,6 +15,7 @@ import UserListDialog from '../components/UserListDialog';
 function mapStateToProps({ app, announcementState, participantState, router }) {
   return {
     owner: app.owner,
+    users: app.users,
     ready: app.ready,
     showAnnouncements: announcementState.showAnnouncements,
     participantState,
@@ -37,8 +38,7 @@ function mapDispatchToProps(dispatch) {
 function getQueries() {
   return {
     conversations: QueryBuilder.conversations(),
-    announcements: QueryBuilder.announcements(),
-    users: QueryBuilder.identities(),
+    announcements: QueryBuilder.announcements()
   };
 }
 
@@ -89,6 +89,7 @@ export default class Messenger extends Component {
           onShowAnnouncements={actions.showAnnouncements}
           onShowParticipants={actions.showParticipants}/>
         <ConversationList
+          owner={owner}
           conversations={conversations}
           activeConversationId={activeConversationId}
           onDeleteConversation={actions.deleteConversation}/>
@@ -127,7 +128,7 @@ export default class Messenger extends Component {
         className="participants-dialog dialog">
         <div>
           <UserListDialog
-            users={users.filter(user => user.id !== owner.id)}
+            users={users.filter(user => user !== owner)}
             selectedUsers={selectedParticipants}
             onUserSelected={actions.addParticipant}
             onUserUnselected={actions.removeParticipant}

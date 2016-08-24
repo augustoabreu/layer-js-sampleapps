@@ -3,7 +3,7 @@
      ng-repeat="message in data track by message.id">
   <div class="avatar-image"><img src="{{message.sender.avatarUrl}}" /></div>
   <div class="message-content">
-    <span class='name'>{{message.sender.displayName}}</span>
+    <span class='name'>{{message.sender.userId || message.sender.name}}</span>
     <div class="message-parts" ng-repeat="part in message.parts">
       <div ng-include="'partials/messages/' + getPartTemplate(part)"></div>
     </div>

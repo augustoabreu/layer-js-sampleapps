@@ -16,7 +16,7 @@ export default class UserList extends Component {
       onUserSelected,
       onUserUnselected
     } = this.props;
-    const selected = Boolean(selectedUsers.filter(selectedUser => selectedUser.id === user.id).length);
+    const selected = Boolean(selectedUsers.filter(selectedUser => selectedUser === user).length);
 
     return (
       <UserListItem

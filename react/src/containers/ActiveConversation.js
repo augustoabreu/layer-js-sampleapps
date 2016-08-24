@@ -12,10 +12,11 @@ import TypingIndicatorContainer from './TypingIndicatorContainer';
 /**
  * Copy data from reducers into our properties
  */
-function mapStateToProps({ activeConversation, router }) {
+function mapStateToProps({ activeConversation, router, app }) {
   return {
     ...activeConversation,
-    activeConversationId: `layer:///conversations/${router.params.conversationId}`
+    activeConversationId: `layer:///conversations/${router.params.conversationId}`,
+    owner: app.owner,
   };
 }
 
@@ -47,6 +48,7 @@ export default class ActiveConversation extends Component {
     const {
       editingTitle,
       title,
+      owner,
       composerMessage,
       activeConversationId,
       conversations,
@@ -64,6 +66,7 @@ export default class ActiveConversation extends Component {
       <div className='right-panel'>
         <ConversationHeader
           title={title}
+          owner={owner}
           activeConversation={activeConversation}
           editingTitle={editingTitle}
           onEditConversationTitle={actions.editConversationTitle}

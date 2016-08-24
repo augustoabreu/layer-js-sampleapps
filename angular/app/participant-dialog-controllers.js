@@ -17,7 +17,7 @@ controllers.controller('participantsDialogCtrl', function($scope) {
   function getSelectedUsers() {
     var result = Array.prototype.slice.call(document.querySelectorAll('.participant-list :checked'))
       .map(function(node) {
-        return $scope.appCtrlState.client.getIdentity(node.value);
+        return node.value;
       });
     return result;
   }

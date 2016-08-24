@@ -59,29 +59,10 @@ sampleControllers.controller('appCtrl', function ($scope) {
      * for this sample) and render.
      */
     $scope.appCtrlState.client.on('ready', function() {
-      $scope.appCtrlState.users = [];
+      $scope.appCtrlState.isReady = true;
+      $scope.appCtrlState.users = window.layerSample.users;
       $scope.appCtrlState.user = window.layerSample.user;
-    });
-
-    // Create the User List query
-    var identityQuery = $scope.appCtrlState.client.createQuery({
-      model: layer.Query.Identity,
-      dataType: 'object',
-      paginationWindow: 500,
-      change: function(evt) {
-        // This query won't run until the client "ready" event has triggered;
-        // and the query's "change" event won't trigger until it runs.
-        // While it is not required to wait, we wait until Identities have loaded before we
-        // start rendering the UI
-        $scope.appCtrlState.isReady = true;
-        $scope.appCtrlState.users = identityQuery.data.filter(function(user) {
-          return user.id !== $scope.appCtrlState.client.user.id;
-        });
-        $scope.$digest();
-        if (evt.type === 'data') {
-          window.layerSample.validateSetup($scope.appCtrlState.client);
-        }
-      }
+      $scope.$digest();
     });
 
     $scope.appCtrlState.client.connect(window.layerSample.userId);
@@ -158,12 +139,10 @@ sampleControllers.controller('chatCtrl', function ($scope, $route, $location) {
 
       // A join of all participants names is the backup title.
       return conversationObject.participants
-      .filter(function(identity) {
-        return !identity.sessionOwner;
+      .filter(function(userId) {
+        return userId !== $scope.chatCtrlState.user;
       })
-      .map(function(identity) {
-        return identity.displayName;
-      }).join(', ');
+      .join(', ');
     }
     return '';
   };

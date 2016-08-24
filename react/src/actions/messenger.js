@@ -4,7 +4,6 @@ import toUUID from '../utils/toUUID';
 export const CLIENT_READY = 'CLIENT_READY';
 export const CHANGE_COMPOSER_MESSAGE = 'CHANGE_COMPOSER_MESSAGE';
 export const SUBMIT_COMPOSER_MESSAGE = 'SUBMIT_COMPOSER_MESSAGE';
-export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const SHOW_PARTICIPANTS = 'SHOW_PARTICIPANTS';
 export const HIDE_PARTICIPANTS = 'HIDE_PARTICIPANTS';
 export const CREATE_CONVERSATION = 'CREATE_CONVERSATION';
@@ -20,13 +19,14 @@ export const ROUTER_DID_CHANGE = '@@reduxReactRouter/routerDidChange';
 export const DELETE_CONVERSATION = 'DELETE_CONVERSATION';
 export const SHOW_ANNOUNCEMENTS = 'SHOW_ANNOUNCEMENTS';
 export const HIDE_ANNOUNCEMENTS = 'HIDE_ANNOUNCEMENTS';
-export const OWNER_SET = 'OWNER_SET';
+export const USERS_SET = 'USERS_SET';
 
-export function ownerSet(owner) {
+export function usersSet(owner, users) {
   return {
-    type: OWNER_SET,
+    type: USERS_SET,
     payload: {
-      owner
+      owner,
+      users
     }
   };
 }
@@ -62,15 +62,6 @@ export function changeComposerMessage(value) {
 export function submitComposerMessage() {
   return {
     type: SUBMIT_COMPOSER_MESSAGE
-  };
-}
-
-export function fetchUsersSuccess(users) {
-  return {
-    type: FETCH_USERS_SUCCESS,
-    payload: {
-      users
-    }
   };
 }
 

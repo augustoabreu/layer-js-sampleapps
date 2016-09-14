@@ -1,6 +1,6 @@
 # Sample apps using Layer Web SDK
 
-This repository contains sample chat applications that use version 1.0 of the Layer Web SDK to demonstrate how one would use the SDK to build a simple chat application using one of these three popular frameworks:
+This repository contains sample chat applications that use version 2.0 of the Layer Web SDK to demonstrate how one would use the SDK to build a simple chat application using one of these three popular frameworks:
 
  - [Backbone](./backbone)
  - [Angular](./angular)
@@ -12,7 +12,7 @@ Each sample app implementation is framework specific and not necessarily a demon
 
 ## The Web SDK
 
-The Web SDK in all samples is loaded via script tag directly from our [CDN](https://cdn.layer.com/sdk/1.1/layer-websdk.js). For more information on how the Web SDK works, see [Web SDK Docs](https://developer.layer.com/docs/websdk).
+The Web SDK in all samples is loaded via script tag directly from our [CDN](https://cdn.layer.com/sdk/2.0/layer-websdk.js). For more information on how the Web SDK works, see [Web SDK Docs](https://developer.layer.com/docs/websdk).
 
 ## Authentication
 
